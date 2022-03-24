@@ -1,0 +1,168 @@
+<!-- 
+Faculdade de Tecnologia de Lins - Prof Antonio Seabra 
+Programação de Dispositivos Móveis
+Curso: Análise e Desenvolvimento de Sistemas
+Prof. Felipe Maciel - felipe.maciel@fateclins.edu.br
+********************************************************************************************
+
+Sem alterar a estrutura HTML, implemente o necessário para que o banner funcione corretamente.
+
+Funcionamento:
+Ao usuário clicar em um dos botões << ANTERIOR / PRÓXIMO >> deve ser animar o banner atual para o mesmo sair para a esquerda da tela e assim que terminar sua animação deve-se entrar com o banner anterior ou o próximo banner (de acordo com o botão clicado pelo usuário). Existem 3 banners, ao estar no terceiro banner e clicar-se no botão PRÓXIMO >> o deve-se aparecer o banner 1, já ao estar no banner 1 e clicar-se no botão << ANTERIOR, deve-se aparecer o banner 3.
+
+Dicas Marotas:
+1 - Para o banner "sair" da tela utilize o valor -100% no atributo left;
+2 - Após mover o banner para fora da tela (-100%), mova-a para a posição 100%, para o mesmo ficar ao lado direito;
+3 - Para passar atributos css a um elemento utilize o método .css, ou seja, $('elemento').css('atributo', 'valor');
+4 - A posição do banner que deve estar em foco, deve ser 0px;
+-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Banner</title>
+	<style>
+		body {
+			color: #FFF;
+		}
+
+		.ban {
+			width: 100%;
+			height: 250px;
+		}
+
+		#banner1 {
+			background-color: #900;
+			position: absolute;
+			left: 0px;
+			top: 0px;
+		}
+
+		#banner2 {
+			background-color: #090;
+			position: absolute;
+			left: 100%;
+			top: 0px;
+		}
+
+		#banner3 {
+			background-color: #009;
+			position: absolute;
+			left: 100%;
+			top: 0px;
+		}
+
+		.btn {
+			top: 200px;
+			position: relative;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div id="banner1" class="ban">BANNER 1</div>
+	<div id="banner2" class="ban">BANNER 2</div>
+	<div id="banner3" class="ban">BANNER 3</div>
+	<button id="btnAnterior" class="btn" acao="a">
+		<< Anterior </button>
+			<button id="btnProximo" class="btn" acao="p"> Próximo >> </button>
+
+
+
+			<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+				integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+			<script>
+				$(document).ready(function () {
+
+
+					$('#btnAnterior').click(function () {
+						banner1 = $('#banner1');
+						banner2 = $('#banner2');
+						banner3 = $('#banner3');
+						banner4 = $('#banner1');
+						if ($(banner1).offset().left == 0) {
+							$('#banner3').animate({
+								left: "0%"
+							}, 1);
+							$('#banner1').animate({
+								left: "-100%"
+							}, 1);
+							$('#banner2').animate({
+								left: "100%"
+							}, 1);
+						} else if ($(banner2).offset().left == 0) {
+
+							$('#banner2').animate({
+								left: "100%"
+							}, 1);
+							$('#banner3').animate({
+								left: "-100%"
+							}, 1);
+							$('#banner1').animate({
+								left: "0%"
+							}, 1);
+
+						} else if ($(banner3).offset().left == 0) {
+
+							$('#banner1').animate({
+								left: "100%"
+							}, 1);
+							$('#banner2').animate({
+								left: "0%"
+							}, 1);
+							$('#banner3').animate({
+								left: "-100%"
+							}, 1);
+						}
+					});
+					$('#btnProximo').click(function () {
+						banner1 = $('#banner1');
+						banner2 = $('#banner2');
+						banner3 = $('#banner3');
+						if ($(banner1).offset().left == 0) {
+							$('#banner1').animate({
+								left: "-100%"
+							}, 1);
+							$('#banner2').animate({
+								left: "0%"
+							}, 1);
+							$('#banner3').animate({
+								left: "100%"
+							}, 1);
+						} else if ($(banner2).offset().left == 0) {
+
+							$('#banner2').animate({
+								left: "-100%"
+							}, 1);
+							$('#banner3').animate({
+								left: "0%"
+							}, 1);
+							$('#banner1').animate({
+								left: "100%"
+							}, 1);
+
+						} else if ($(banner3).offset().left == 0) {
+
+							$('#banner3').animate({
+								left: "-100%"
+							}, 1);
+							$('#banner1').animate({
+								left: "0%"
+							}, 1);
+							$('#banner2').animate({
+								left: "100%"
+							}, 1);
+						}
+
+					})
+
+				});
+
+			</script>
+
+</body>
+
+</html>
